@@ -1,27 +1,50 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Switch, Redirect, NavLink} from "react-router-dom"
+import Recommend from './recommend/Recommend'
+import Ranking from './ranking/Ranking'
+import Search from './search/Search'
+
 import '../assets/stylus/reset.styl'
 import './App.styl';
+
 
 class App extends React.Component {
     render() {
         return (
-            <div className="app">
-                <header className="app-header">
-                    <img className="app-logo" src={require('../assets/imgs/logo.png')} alt=""/>
-                    <h1 className="app-title">Noom Music</h1>
-                </header>
-                <div className="music-tab">
-                    <div className="tab-item">
-                        <span>推荐</span>
+            <Router>  {/*App的根使用Router包裹*/}
+                <div className="app">
+                    <header className="app-header">
+                        <img className="app-logo" src={require('../assets/imgs/logo.png')} alt=""/>
+                        <h1 className="app-title">Noom Music</h1>
+                    </header>
+                    <div className="music-tab">
+                        <div className="tab-item">
+                            <NavLink to="/recommend" className="nav-link">
+                                <span>推荐</span>
+                            </NavLink>
+                        </div>
+                        <div className="tab-item">
+                            <NavLink to="/ranking" className="nav-link">
+                                <span>排行榜</span>
+                            </NavLink>
+                        </div>
+                        <div className="tab-item">
+                            <NavLink to="/search" className="nav-link">
+                                <span>搜索</span>
+                            </NavLink>
+                        </div>
                     </div>
-                    <div className="tab-item">
-                        <span>排行榜</span>
-                    </div>
-                    <div className="tab-item">
-                        <span>搜索</span>
+                    <div className="music-view">
+                        <Switch>
+                            <Route path="/recommend" component={Recommend}/>
+                            <Route path="/ranking" component={Ranking}/>
+                            <Route path="/search" component={Search}/>
+                            <Redirect from="/" to="recommend"/>
+                            <Route component={Recommend}/>
+                        </Switch>
                     </div>
                 </div>
-            </div>
+            </Router>
         );
     }
 }
