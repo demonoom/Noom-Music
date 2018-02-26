@@ -11,7 +11,8 @@ import './App.styl';
 class App extends React.Component {
     render() {
         return (
-            <Router>  {/*App的根使用Router包裹*/}
+            <Router>
+                {/*App的根使用Router包裹,这行注释与上一行在同一行就会报错*/}
                 <div className="app">
                     <header className="app-header">
                         <img className="app-logo" src={require('../assets/imgs/logo.png')} alt=""/>
