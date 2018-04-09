@@ -17,21 +17,20 @@ class Recommend extends React.Component {
     componentDidMount() {
         getCarousel().then((res) => {
             if (res) {
-                console.log(res);
                 if (res.code === CODE_SUCCESS) {
                     this.setState({
                         sliderList: res.data.slider
-                    }), () => {
+                    }, () => {      //setState第二个参数是一个回调函数，当组件更新完成后会立即调用，这个时候我们在回调函数里面初始化swiper
                         if (!this.sliderSwiper) {
                             //初始化轮播图
                             this.sliderSwiper = new Swiper('.slider-container', {
-                                loop: true,
-                                autoPlay: 3000,
-                                autoplayDisableOnInteraction: false,
-                                pagination: '.swiper-pagination'
+                                loop: true,   //开启loop模式,开启环路模式
+                                autoplay: 3000,  //自动切换
+                                autoplayDisableOnInteraction: false,  //用户操作swiper之后，是否禁止autoplay。默认为true：停止。如果设置为false，用户操作swiper之后自动切换不会停止，每次都会重新启动autoplay。
+                                pagination: '.swiper-pagination'  //使用分页
                             })
                         }
-                    }
+                    })
                 }
             }
         })
