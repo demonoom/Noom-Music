@@ -37,6 +37,8 @@ class App extends React.Component {
                     </div>
                     <div className="music-view">
                         <Switch>
+                            {/*Switch组件用来选择最近的一个路由，否则最后一个没有指定path的路由也会显示*/}
+                            {/*Redirect重定向到列表页*/}
                             <Route path="/recommend" component={Recommend}/>
                             <Route path="/ranking" component={Ranking}/>
                             <Route path="/search" component={Search}/>

@@ -35,6 +35,14 @@ function buildUrl(url, data) {
     for (var k in data) {
         params.push(`${k}=${data[k]}`);
     }
+    // 更人性的拼接
+
+    /*let name = '牛旭东';
+    let age = 9;
+    let str = `${name}${age}岁了`;
+    console.log(str)
+    牛旭东9岁了*/
+
     let param = params.join("&");
     if (url.indexOf("?") === -1) {
         url += "?" + param;
