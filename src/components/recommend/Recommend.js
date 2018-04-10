@@ -35,7 +35,7 @@ class Recommend extends React.Component {
                     })
                 }
             }
-        })
+        });
         getNewAlbum().then((res) => {
             if (res) {
                 if (res.code === CODE_SUCCESS) {
@@ -43,13 +43,15 @@ class Recommend extends React.Component {
                     //根据发布时间降序排列
                     albumList.sort((a, b) => {
                         //http://blog.sina.com.cn/s/blog_927e55fd0102wb2s.html
-                        console.log(a.public_time);
-                        console.log('---------');
-                        console.log(b.public_time);
+                        // sort只有一个参数(可选)称为比较参数,
+                        // a,b代表原数组中的任意数组元素的引用
+                        // 根据比较函数的处理，如果函数返回值小于0，则按a在前，b在后排序，如果函数返回值大于0，则按b在前，a在后排序，如果函数返回值等于0，则按排序不变
+                        return new Date(b.public_time).getTime() - new Date(a.public_time).getTime();
                     })
+                    this.setState({newAlbums: albumList});
                 }
             }
-        })
+        });
     }
 
     toLink(linkUrl) {
@@ -60,6 +62,11 @@ class Recommend extends React.Component {
     }
 
     render() {
+
+        // let albums = this.state.newAlbums.map(item => {
+        //     let album =
+        // })
+
         return (
             <div className="music-recommend">
                 <div className="slider-container">
