@@ -1,7 +1,8 @@
 import React from "react"
 import Swiper from 'swiper'
-import {getCarousel} from '../../api/recommend'
+import {getCarousel, getNewAlbum} from '../../api/recommend'
 import {CODE_SUCCESS} from "../../api/config";
+import * as AlbumModel from '../../model/album'
 import 'swiper/dist/css/swiper.min.css'
 import "./recommend.styl"
 
@@ -11,6 +12,7 @@ class Recommend extends React.Component {
 
         this.state = {
             sliderList: [],
+            newAlbums: [],
         }
     }
 
@@ -30,6 +32,20 @@ class Recommend extends React.Component {
                                 pagination: '.swiper-pagination'  //使用分页
                             })
                         }
+                    })
+                }
+            }
+        })
+        getNewAlbum().then((res) => {
+            if (res) {
+                if (res.code === CODE_SUCCESS) {
+                    let albumList = res.albumlib.data.list;
+                    //根据发布时间降序排列
+                    albumList.sort((a, b) => {
+                        //http://blog.sina.com.cn/s/blog_927e55fd0102wb2s.html
+                        console.log(a.public_time);
+                        console.log('---------');
+                        console.log(b.public_time);
                     })
                 }
             }
