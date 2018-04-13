@@ -9,7 +9,9 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "better-scroll": "^1.5.5",
     "jsonp": "^0.2.1",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
