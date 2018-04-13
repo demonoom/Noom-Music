@@ -47,7 +47,7 @@ class Recommend extends React.Component {
                         // a,b代表原数组中的任意数组元素的引用
                         // 根据比较函数的处理，如果函数返回值小于0，则按a在前，b在后排序，如果函数返回值大于0，则按b在前，a在后排序，如果函数返回值等于0，则按排序不变
                         return new Date(b.public_time).getTime() - new Date(a.public_time).getTime();
-                    })
+                    });
                     this.setState({newAlbums: albumList});
                 }
             }
@@ -63,9 +63,25 @@ class Recommend extends React.Component {
 
     render() {
 
-        // let albums = this.state.newAlbums.map(item => {
-        //     let album =
-        // })
+        let albums = this.state.newAlbums.map(item => {
+            //通过函数创建专辑对象
+            //在我看来这种通过构造函数new出新对象的方式与以往我直接遍历渲染的方式比起来只是将字段重新简化命名,还未看出更好的作用
+            let album = AlbumModel.createAlbumByList(item);
+            return (
+                <div className='album-wrapper' key={album.mId}>
+                    {/*像这种数组的遍历渲染若没有key就会爆出警告*/}
+                    {/*Warning: Each child in an array or iterator should have a unique "key" prop*/}
+                    <div className='left'>
+                        <img width='100%' height='100%' src={album.img} alt={album.name}/>
+                    </div>
+                    <div className='right'>
+                        <div className='album-name'>{album.name}</div>
+                        <div className='singer-name'>{album.singer}</div>
+                        <div className='public-time'>{album.publicTime}</div>
+                    </div>
+                </div>
+            )
+        });
 
         return (
             <div className="music-recommend">
@@ -84,6 +100,12 @@ class Recommend extends React.Component {
                         }
                     </div>
                     <div className='swiper-pagination'></div>
+                </div>
+                <div className='album-container'>
+                    <h1 className='title'>最新专辑</h1>
+                    <div className='album-list'>
+                        {albums}
+                    </div>
                 </div>
             </div>
         )
