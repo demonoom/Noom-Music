@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect, NavLink} from "react-r
 import Recommend from './recommend/Recommend'
 import Ranking from './ranking/Ranking'
 import Search from './search/Search'
+import Album from './search/Album'
 
 import '../assets/stylus/reset.styl'
 import './App.styl';
@@ -40,7 +41,10 @@ class App extends React.Component {
                             {/*Switch组件用来选择最近的一个路由，否则最后一个没有指定path的路由也会显示*/}
                             {/*Redirect重定向到列表页*/}
                             <Route path="/recommend" component={Recommend}/>
-                            <Route path="/ranking" component={Ranking}/>
+                            {/*<Route path="/ranking" component={Ranking}/>*/}
+                            <Route path="/ranking" render={() => (
+                                <Route path="/ranking/Album" exact component={Album}/>
+                            )}/>
                             <Route path="/search" component={Search}/>
                             <Redirect from="/" to="recommend"/>
                             <Route component={Recommend}/>
